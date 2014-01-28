@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
+
+	<groupId>com.github.lpandzic</groupId>
+	<artifactId>junit-bdd</artifactId>
+	<version>0.1-SNAPSHOT</version>
+
+	<name>JUnit-BDD</name>
+	<description>Provides a JUnit test rule which enables Behavior-driven development (BDD) style testing.</description>
+	<url>http://github.com/lpandzic/junit-bdd</url>
+	<inceptionYear>2014</inceptionYear>
+
+	<licenses>
+		<license>
+			<name>The GNU Lesser General Public License, version 2.1</name>
+			<url>http://opensource.org/licenses/LGPL-2.1</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>lpandzic</id>
+			<name>Lovro Pandžić</name>
+			<email>lovro.pandzic@gmail.com</email>
+		</developer>
+	</developers>
+
+	<properties>
+		<!-- DEPENDENCY VERSIONS -->
+		<chameleon.version>1.2</chameleon.version>
+		<junit.version>4.11</junit.version>
+		<mockito-core.version>1.9.5</mockito-core.version>
+
+		<!-- PLUGIN VERSIONS -->
+		<maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
+		<maven-source-plugin.version>2.2.1</maven-source-plugin.version>
+		<maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
+		<maven-enforcer-plugin.version>1.3.1</maven-enforcer-plugin.version>
+		<maven-release-plugin.version>2.3.2</maven-release-plugin.version>
+		<maven-gpg-plugin.version>1.4</maven-gpg-plugin.version>
+
+		<!-- OTHER PROPERTIES -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.report.outputEncoding>UTF-8</project.report.outputEncoding>
+		<java.version>1.6</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.github.lpandzic.chameleon</groupId>
+			<artifactId>chameleon</artifactId>
+			<version>${chameleon.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>${mockito-core.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>${maven-enforcer-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>enforce-java</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireJavaVersion>
+									<version>${java.version}</version>
+								</requireJavaVersion>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>${maven-source-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${maven-javadoc-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
