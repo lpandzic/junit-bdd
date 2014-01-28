@@ -35,6 +35,22 @@
 		</developer>
 	</developers>
 
+	<scm>
+		<connection>scm:git:git//github.com:lpandzic/junit-bdd.git</connection>
+		<developerConnection>scm:git:git@github.com:lpandzic/junit-bdd.git</developerConnection>
+		<url>https://github.com/lpandzic/junit-bdd</url>
+	</scm>
+
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/lpandzic/junit-bdd/issues</url>
+	</issueManagement>
+
+	<ciManagement>
+		<system>Jenkins</system>
+		<url>https://lpandzic.ci.cloudbees.com/job/junit-bdd/</url>
+	</ciManagement>
+
 	<properties>
 		<!-- DEPENDENCY VERSIONS -->
 		<chameleon.version>1.2</chameleon.version>
