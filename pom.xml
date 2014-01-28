@@ -13,6 +13,7 @@
 	<groupId>com.github.lpandzic</groupId>
 	<artifactId>junit-bdd</artifactId>
 	<version>0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
 	<name>JUnit-BDD</name>
 	<description>Provides a JUnit test rule which enables Behavior-driven development (BDD) style testing.</description>
