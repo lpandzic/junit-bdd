@@ -80,6 +80,10 @@ Latest dependency:
 </dependency>
 ```
 
+##Alternatives
+
+If you are only interested in enhancements to the exceptional behavior testing a nice alternative is provided by [catch-exception project](https://code.google.com/p/catch-exception/).
+
 ## Changes
 
 See the [Changelog](https://github.com/lpandzic/junit-bdd/blob/master/CHANGELOG.md)
