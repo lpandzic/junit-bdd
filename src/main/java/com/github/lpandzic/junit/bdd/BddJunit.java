@@ -26,7 +26,8 @@ import org.junit.Test;
  *
  *         then(classUnderTest).shouldThrow(Exception.class);
  *     }
- * }</pre></p>
+ * }
+ * </pre></p>
  *
  * <p>Bdd style testing of return value:
  * <pre>
@@ -45,7 +46,8 @@ import org.junit.Test;
  *
  *         then(classUnderTest).shouldReturn(expectedValue);
  *     }
- * }</pre></p>
+ * }
+ * </pre></p>
  *
  *
  * <p>If you are using <a href="https://github.com/mockito/mockito">Mockito</a> of version 1.8.0 or higher, {@code
