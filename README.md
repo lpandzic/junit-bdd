@@ -52,7 +52,9 @@ public class TestClassExample {
 To enable more readable bdd syntax with `when` and `then` syntax use static import 
 `import static com.github.lpandzic.junit.bdd.BddJunit.*;`.
 
-For more information about usage see the javadoc in the `Bdd` and `BddJunit` classes. 
+For more information about usage see the javadoc in the `Bdd` and `BddJunit` classes.
+
+If you are using [Mockito](https://github.com/mockito/mockito) checkout the [BDDMockito](http://docs.mockito.googlecode.com/hg/latest/org/mockito/BDDMockito.html).
 
 ## Installation
 
