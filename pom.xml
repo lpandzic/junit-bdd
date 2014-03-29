@@ -54,9 +54,8 @@
 
 	<properties>
 		<!-- DEPENDENCY VERSIONS -->
-		<chameleon.version>1.2</chameleon.version>
 		<junit.version>4.11</junit.version>
-		<mockito-core.version>1.9.5</mockito-core.version>
+    <hamcrest-core.version>1.3</hamcrest-core.version>
 
 		<!-- PLUGIN VERSIONS -->
 		<maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
@@ -69,27 +68,21 @@
 		<!-- OTHER PROPERTIES -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.report.outputEncoding>UTF-8</project.report.outputEncoding>
-		<java.version>1.6</java.version>
-	</properties>
+		<java.version>1.8</java.version>
+  </properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>com.github.lpandzic.chameleon</groupId>
-			<artifactId>chameleon</artifactId>
-			<version>${chameleon.version}</version>
-		</dependency>
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-core</artifactId>
+      <version>${hamcrest-core.version}</version>
+    </dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<version>${mockito-core.version}</version>
-			<scope>test</scope>
+      <scope>test</scope>
 		</dependency>
 	</dependencies>
 

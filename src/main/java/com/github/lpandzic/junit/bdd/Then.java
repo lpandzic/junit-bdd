@@ -2,249 +2,112 @@ package com.github.lpandzic.junit.bdd;
 
 import org.hamcrest.Matcher;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.junit.Assert.*;
-import static org.junit.internal.matchers.ThrowableCauseMatcher.hasCause;
-import static org.junit.internal.matchers.ThrowableMessageMatcher.hasMessage;
+import java.util.Objects;
+import java.util.Optional;
+
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
- * Used to describe expected outcome of {@link BddJunit#when(Object) when}  call on {@link UnderTest class under test}.
- *
  * @author Lovro Pandzic
  */
 public final class Then {
 
-    /**
-     * Used for notifying exception verification result.
-     */
-    private final BddProxyController bddProxyController;
+    public static final class Throws<T extends Exception> {
 
-    /**
-     * @see BddProxyController#thrownException
-     */
-    private final Throwable thrownException;
+        private final Optional<T> exception;
 
-    /**
-     * @see BddProxyController#returnValue
-     */
-    private final Object actualResult;
+        public Throws(Optional<T> exception) {
 
-    Then(BddProxyController bddProxyController, Throwable thrownException, Object actualResult) {
-
-        this.bddProxyController = bddProxyController;
-        this.thrownException = thrownException;
-        this.actualResult = actualResult;
-    }
-
-    public Throws shouldThrow(Class<? extends Throwable> type) {
-
-        return new Throws(type);
-    }
-
-    public void shouldReturn(Object expected) {
-
-        assertEquals(expected, actualResult);
-    }
-
-    public void shouldReturnTrue() {
-
-        assertEquals(true, actualResult);
-    }
-
-    public void shouldReturnFalse() {
-
-        assertEquals(false, actualResult);
-    }
-
-    public void shouldReturnNull() {
-
-        assertNull(actualResult);
-    }
-
-    public void shouldNotReturnNull() {
-
-        assertNotNull(actualResult);
-    }
-
-    public void shouldNotReturn(Object value) {
-
-        assertNotEquals(value, actualResult);
-    }
-
-    public void shouldReturnArray(Object[] array) {
-
-        if (!(actualResult instanceof Object[])) {
-            fail(String.format("expected %s but was %s",
-                               Object[].class.getSimpleName(),
-                               actualResult.getClass().getSimpleName()));
+            this.exception = Objects.requireNonNull(exception);
         }
 
-        assertArrayEquals((Object[]) actualResult, array);
-    }
+        @SuppressWarnings("unchecked")
+        public MessageOrCause thenShouldThrowExceptionThat(Matcher<? extends Exception> matcher) {
 
-    public void shouldReturnArray(byte[] array) {
-
-        if (!(actualResult instanceof byte[])) {
-            fail(String.format("expected %s but was %s",
-                               byte[].class.getSimpleName(),
-                               actualResult.getClass().getSimpleName()));
+            Objects.requireNonNull(matcher);
+            assertThat(exception.orElse(null), (Matcher<? super T>) matcher);
+            return new MessageOrCause();
         }
 
-        assertArrayEquals((byte[]) actualResult, array);
-    }
+        @SuppressWarnings("unchecked")
+        public MessageOrCause thenShouldThrowCheckedExceptionThat(Matcher<? extends T> matcher) {
 
-    public void shouldReturnArray(char[] array) {
-
-        if (!(actualResult instanceof char[])) {
-            fail(String.format("expected %s but was %s",
-                               char[].class.getSimpleName(),
-                               actualResult.getClass().getSimpleName()));
+            Objects.requireNonNull(matcher);
+            assertThat(exception.orElse(null), (Matcher<? super T>) matcher);
+            return new MessageOrCause();
         }
 
-        assertArrayEquals((char[]) actualResult, array);
-    }
+        @SuppressWarnings("unchecked")
+        private void verifyCause(Matcher<? extends Throwable> matcher) {
 
-    public void shouldReturnArray(short[] array) {
-
-        if (!(actualResult instanceof short[])) {
-            fail(String.format("expected %s but was %s",
-                               short[].class.getSimpleName(),
-                               actualResult.getClass().getSimpleName()));
+            Objects.requireNonNull(matcher);
+            assertThat(exception.map(T::getCause).orElse(null), (Matcher<? super Throwable>) matcher);
         }
 
-        assertArrayEquals((short[]) actualResult, array);
-    }
+        private void verifyMessage(Matcher<String> matcher) {
 
-    public void shouldReturnArray(int[] array) {
-
-        if (!(actualResult instanceof int[])) {
-            fail(String.format("expected %s but was %s",
-                               int[].class.getSimpleName(),
-                               actualResult.getClass().getSimpleName()));
+            Objects.requireNonNull(matcher);
+            assertThat(exception.map(T::getMessage).orElse(null), matcher);
         }
 
-        assertArrayEquals((int[]) actualResult, array);
-    }
+        public final class MessageOrCause {
 
-    public void shouldReturnArray(long[] array) {
+            public CauseEnding withMessageThat(Matcher<String> matcher) {
 
-        if (!(actualResult instanceof long[])) {
-            fail(String.format("expected %s but was %s",
-                               long[].class.getSimpleName(),
-                               actualResult.getClass().getSimpleName()));
-        }
-
-        assertArrayEquals((long[]) actualResult, array);
-    }
-
-    public void shouldReturnArray(float[] array, float delta) {
-
-        if (!(actualResult instanceof float[])) {
-            fail(String.format("expected %s but was %s",
-                               float[].class.getSimpleName(),
-                               actualResult.getClass().getSimpleName()));
-        }
-
-        assertArrayEquals((float[]) actualResult, array, delta);
-    }
-
-    public void shouldReturnArray(double[] array, double delta) {
-
-        if (!(actualResult instanceof double[])) {
-            fail(String.format("expected %s but was %s",
-                               double[].class.getSimpleName(),
-                               actualResult.getClass().getSimpleName()));
-        }
-
-        assertArrayEquals((double[]) actualResult, array, delta);
-    }
-
-    public final class Throws {
-
-        private final ExpectedThrowableMatcher expectedThrowableMatcher;
-
-        private Throws(Class<? extends Throwable> type) {
-
-            expectedThrowableMatcher = new ExpectedThrowableMatcher();
-            expect(type);
-        }
-
-        void expect(Class<? extends Throwable> type) {
-
-            expect(instanceOf(type));
-        }
-
-        void expectMessage(String substring) {
-
-            expectMessage(containsString(substring));
-        }
-
-        void expectMessage(Matcher<String> matcher) {
-
-            expect(hasMessage(matcher));
-        }
-
-        void expectCause(Matcher<? extends Throwable> expectedCause) {
-
-            expect(hasCause(expectedCause));
-        }
-
-        private void expect(Matcher<?> matcher) {
-
-            expectedThrowableMatcher.add(matcher);
-            assertThat(thrownException, expectedThrowableMatcher.build());
-            bddProxyController.onThrowableValidatedSuccessfully();
-        }
-
-        public Message withMessage(String substring) {
-
-            expectMessage(substring);
-            return new Message();
-        }
-
-        public Message withMessage(Matcher<String> matcher) {
-
-            expectMessage(matcher);
-            return new Message();
-        }
-
-        public Cause withCause(Matcher<? extends Throwable> expectedCause) {
-
-            expectCause(expectedCause);
-            return new Cause();
-        }
-
-        public final class Message {
-
-            private Message() {
-
+                verifyMessage(matcher);
+                return new CauseEnding();
             }
 
-            public void andCause(Matcher<? extends Throwable> expectedCause) {
 
-                Throws.this.withCause(expectedCause);
+            public MessageEnding withCauseThat(Matcher<? extends Throwable> matcher) {
+
+                verifyCause(matcher);
+                return new MessageEnding();
             }
 
+            private MessageOrCause() {
+
+            }
         }
 
-        public final class Cause {
+        public final class CauseEnding {
 
-            private Cause() {
+            public void andCauseThat(Matcher<? extends Throwable> matcher) {
 
+                verifyCause(matcher);
             }
 
-            public void andMessage(String substring) {
+            private CauseEnding() {
 
-                Throws.this.withMessage(substring);
+            }
+        }
+
+        public final class MessageEnding {
+
+            public void andMessageThat(Matcher<String> matcher) {
+
+                verifyMessage(matcher);
             }
 
-            public void andMessage(Matcher<String> matcher) {
+            private MessageEnding() {
 
-                Throws.this.withMessage(matcher);
             }
-
         }
     }
 
+    public static final class Returns<T> {
+
+        private final Optional<T> value;
+
+        public Returns(Optional<T> value) {
+
+            this.value = value;
+        }
+
+        public void thenShouldReturnValueThat(Matcher<T> matcher) {
+
+            Objects.requireNonNull(matcher);
+            assertThat(value.orElse(null), matcher);
+        }
+    }
 }
