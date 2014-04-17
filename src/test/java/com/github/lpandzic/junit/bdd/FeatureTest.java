@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import static com.github.lpandzic.junit.bdd.Bdd.when;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.Is.isA;
@@ -15,18 +16,15 @@ import static org.hamcrest.core.Is.isA;
 /**
  * @author Lovro Pandzic
  */
-public class BddTest {
+public class FeatureTest {
+
+    @Rule
+    public Bdd bdd = Bdd.initialized();
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none().handleAssertionErrors();
+
     private ClassUnderTest classUnderTest = new ClassUnderTest();
-
-    @Test
-    public void shouldPassWhenNoExceptionIsThrown() throws Exception {
-
-        when(() -> classUnderTest.returnsA(null)).then((NullPointerException e) -> assertThat(e,
-                                                                                              isA((NullPointerException.class))));
-    }
 
     @Test
     public void shouldPassWhenExpectedExceptionIsThrown() throws Exception {
@@ -40,8 +38,9 @@ public class BddTest {
         expectedException.handleAssertionErrors();
         expectedException.expect(AssertionError.class);
 
-        when(() -> classUnderTest.throwsA(new IOException())).then((NullPointerException e) -> assertThat(e,
-                                                                                                          isA(NullPointerException.class)));
+        when(() -> classUnderTest.throwsA(new IOException())).then(e -> assertThat(e, is(instanceOf(NullPointerException
+                                                                                                            .class))
+                                                                                  ));
     }
 
     @Test
@@ -65,6 +64,20 @@ public class BddTest {
         when(new Object()).then(actual -> assertThat(actual, isA(Object.class)));
     }
 
+    @Test(expected = Exception.class)
+    public void shouldFailWhenValueProviderThrowsAUncheckedException() throws Exception {
+
+        when(classUnderTest.throwsA(new Exception()));
+    }
+
+    @Test
+    public void shouldFailWhenExceptionProviderThrowsAUncheckedException() throws Exception {
+
+        expectedException.expect(Exception.class);
+
+        when(() -> classUnderTest.throwsA(new Exception()));
+    }
+
     @Test
     public void shouldFailWhenReturnsOneObjectButExpectsDifferentObject() {
 
@@ -77,15 +90,9 @@ public class BddTest {
         when(classUnderTest.returnsA(value)).then(actual -> assertThat(actual, is(equalTo(new Object()))));
     }
 
-    @Test
-    public void shouldPassWhenReturnsExpectedNull() {
-
-        when(classUnderTest.returnsA(new Object())).then(actual -> assertThat(actual, is(equalTo(null))));
-    }
-
     private static class ClassUnderTest {
 
-        public <T extends Throwable> void throwsA(T exception) throws T {
+        public <T extends Throwable> Void throwsA(T exception) throws T {
 
             throw exception;
         }

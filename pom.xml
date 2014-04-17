@@ -12,7 +12,7 @@
 
 	<groupId>com.github.lpandzic</groupId>
 	<artifactId>junit-bdd</artifactId>
-	<version>0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>JUnit-BDD</name>
@@ -73,8 +73,20 @@
 
 	<dependencies>
     <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>*</groupId>
+          <artifactId>*</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
       <groupId>org.hamcrest</groupId>
-      <artifactId>hamcrest-core</artifactId>
+      <artifactId>hamcrest-all</artifactId>
       <version>${hamcrest-core.version}</version>
       <scope>test</scope>
     </dependency>
@@ -85,13 +97,6 @@
       <version>2.0M10</version>
       <scope>test</scope>
     </dependency>
-
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
-      <scope>test</scope>
-		</dependency>
 	</dependencies>
 
 	<build>

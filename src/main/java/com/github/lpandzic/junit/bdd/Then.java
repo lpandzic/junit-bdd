@@ -1,36 +1,48 @@
 package com.github.lpandzic.junit.bdd;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
 
 /**
+ * Defines expected outcomes produced by {@link When}.
+ *
  * @author Lovro Pandzic
  */
 public final class Then {
 
-    public static final class Throws<T extends Exception> {
+    /**
+     * Used to describe expected thrown exception.
+     *
+     * @param <T> type of expected {@link Throwable}
+     */
+    public static final class Throws<T extends Throwable> {
 
-        private final Optional<T> exception;
+        private final Bdd bdd;
 
-        public Throws(Optional<T> exception) {
+        public Throws(Bdd bdd) {
 
-            this.exception = Objects.requireNonNull(exception);
+            this.bdd = bdd;
         }
 
-        @SuppressWarnings("unchecked")
-        public <R extends Throwable> void then(Consumer<R> consumer) {
+        public void then(Consumer<Throwable> consumer) {
 
-            consumer.accept((R) exception.orElse(null));
+            Optional<Throwable> throwable = bdd.takeThrownException();
+            consumer.accept(throwable.orElse(null));
         }
 
         @SuppressWarnings("unchecked")
         public <E extends T> void thenChecked(Consumer<E> consumer) {
 
-            consumer.accept((E) exception.orElse(null));
+            Optional<Throwable> throwable = bdd.takeThrownException();
+            consumer.accept((E) throwable.orElse(null));
         }
     }
 
+    /**
+     * Used to describe expected returned value.
+     *
+     * @param <T> type of returned value
+     */
     public static final class Returns<T> {
 
         private final Optional<T> value;
