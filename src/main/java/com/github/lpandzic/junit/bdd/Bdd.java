@@ -61,6 +61,8 @@ public final class Bdd implements TestRule {
 
     /**
      * Static factory method for {@link Bdd}.
+     *
+     * @return new bdd
      */
     public static Bdd initialized() {
 
