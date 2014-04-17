@@ -121,7 +121,7 @@ Latest dependency:
 <dependency>
     <groupId>com.github.lpandzic</groupId>
 	<artifactId>junit-bdd</artifactId>
-	<version>0.1-SNAPSHOT</version>
+	<version>1.0-SNAPSHOT</version>
 </dependency>
 ```
 
