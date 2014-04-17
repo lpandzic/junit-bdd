@@ -17,7 +17,7 @@ import java.util.Optional;
  *
  * &#064;Rule
  * public Bdd bdd = Bdd.initialized();
- * </pre></p>
+ * </pre>
  *
  * @author Lovro Pandzic
  * @see <a href="http://dannorth.net/introducing-bdd/">Introducing Bdd</a>
