@@ -4,7 +4,9 @@
 
 JUnit-BDD is a JUnit [Rule][1] which provides a simple and fluent API that gives you a way of structuring your test code within when and then blocks used in Behavior-driven development.
 
-For more information on the subject of  Behavior-driven development see the following links: [Introducing BDD][2], [GivenWhenThen article by M. Fowler][3] or [Wikipedia article][4].
+This projects depends on Java 8 SE and [JUnit][2] (with transitive dependencies excluded).
+
+For more information on the subject of  Behavior-driven development see the following links: [Introducing BDD][3], [GivenWhenThen article by M. Fowler][4] or [Wikipedia article][5].
 
 ##Contents
 
@@ -16,7 +18,8 @@ For more information on the subject of  Behavior-driven development see the foll
     * [Assertion framework flexibility](#AssertionFrameworkFlexibility)
 2. [Installation](#Installation)
 3. [Changes](#Changes)
-4. [Credits](#Credits)
+4. [License](#License)
+5. [Credits](#Credits)
 
 ## <a name="Features"></a> Features
 
@@ -127,7 +130,11 @@ Latest dependency:
 
 ## <a name="Changes"></a> Changes
 
-See the [Changelog](https://github.com/lpandzic/junit-bdd/blob/master/CHANGELOG.md)
+See the [Changelog][9]
+
+## <a name="License"></a> License
+
+Licensed under [MIT License][10].
 
 ## <a name="Credits"></a> Credits
 
@@ -136,10 +143,12 @@ Continuous Integration provided by:
 [![Powered by CloudBees](http://www.cloudbees.com/sites/default/files/Button-Powered-by-CB.png)](http://www.cloudbees.com/sites/default/files/Button-Powered-by-CB.png)
 
 [1]: http://junit-team.github.io/junit/javadoc/4.11/org/junit/Rule.html
-[2]: http://dannorth.net/introducing-bdd/
-[3]: http://martinfowler.com/bliki/GivenWhenThen.html
-[4]: http://en.wikipedia.org/wiki/Behavior-driven_development
-[5]: http://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html
+[2]: https://github.com/junit-team/junit
+[3]: http://dannorth.net/introducing-bdd/
+[4]: http://martinfowler.com/bliki/GivenWhenThen.html
+[5]: http://en.wikipedia.org/wiki/Behavior-driven_development
 [6]: https://github.com/hamcrest/JavaHamcrest
 [7]: https://github.com/junit-team/junit/wiki/Assertions
 [8]: https://github.com/alexruiz/fest-assert-2.x
+[9]: https://github.com/lpandzic/junit-bdd/blob/master/CHANGELOG.md
+[10]: https://github.com/lpandzic/junit-bdd/blob/master/LICENSE
