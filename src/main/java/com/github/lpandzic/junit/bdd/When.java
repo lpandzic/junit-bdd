@@ -22,7 +22,7 @@ public final class When {
      * Used for specifying behavior that should throw an exception.
      *
      * @param throwableSupplier supplier or throwable
-     * @param <T>               the type of
+     * @param <T>               type of throwable
      *
      * @return new {@link Then.Throws}
      */
