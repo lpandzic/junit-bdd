@@ -98,6 +98,8 @@ public final class Bdd implements TestRule {
      */
     void putThrownException(Throwable throwable) {
 
+        requireThatNoUnexpectedExceptionWasThrown();
+
         thrownException = Optional.of(throwable);
     }
 
@@ -118,12 +120,13 @@ public final class Bdd implements TestRule {
     /**
      * Throws {@link #thrownException} if present.
      *
-     * @throws Throwable if not consumed by then block
+     * @throws IllegalStateException if a {@code thrownException} already contains an exception,
+     *                               the previous thrown exception is wrapped
      */
-    private void requireThatNoUnexpectedExceptionWasThrown() throws Throwable {
+    private void requireThatNoUnexpectedExceptionWasThrown() {
 
         if (thrownException.isPresent()) {
-            throw thrownException.get();
+            throw new IllegalStateException("Unexpected exception was thrown", thrownException.get());
         }
     }
 

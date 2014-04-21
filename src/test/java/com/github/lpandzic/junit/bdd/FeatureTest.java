@@ -7,8 +7,7 @@ import org.junit.rules.ExpectedException;
 import java.io.IOException;
 
 import static com.github.lpandzic.junit.bdd.Bdd.when;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.Is.isA;
@@ -51,7 +50,7 @@ public class FeatureTest {
     }
 
     @Test
-    public void simpleLambdaThrowTest() {
+    public void simpleLambdaThrowTest() throws Exception {
 
         when(() -> {
             throw new Exception();
@@ -73,7 +72,9 @@ public class FeatureTest {
     @Test
     public void shouldFailWhenExceptionProviderThrowsAUncheckedException() throws Exception {
 
-        expectedException.expect(Exception.class);
+        expectedException.expect(IllegalStateException.class);
+        expectedException.expectMessage("Unexpected exception was thrown");
+        expectedException.expectCause(isA(Exception.class));
 
         when(() -> classUnderTest.throwsA(new Exception()));
     }
@@ -88,6 +89,18 @@ public class FeatureTest {
 
         Object value = new Object();
         when(classUnderTest.returnsA(value)).then(actual -> assertThat(actual, is(equalTo(new Object()))));
+    }
+
+    @Test
+    public void shouldFailOnFirstWhenWhenTwoWhensFail() {
+
+        expectedException.expect(IllegalStateException.class);
+        expectedException.expectMessage("Unexpected exception was thrown");
+        expectedException.expectCause(isA(IOException.class));
+
+
+        when(() -> classUnderTest.throwsA(new IOException()));
+        when(() -> classUnderTest.throwsA(new Exception()));
     }
 
     private static class ClassUnderTest {
