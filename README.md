@@ -13,8 +13,8 @@ For more information on the subject of  Behavior-driven development see the foll
 1. [Features](#Features)
     * [Introduction](#Introduction)
     * [Return value assertion](#ReturnValueAssertion)
-    * [Thrown exception assertion](#ThrownExceptiosAssertion)
-    * [Checked exceptions assertion](#ThrownCheckedExceptiosAssertion)
+    * [Thrown exception assertion](#ThrownExceptionsAssertion)
+    * [Checked exceptions assertion](#ThrownCheckedExceptionsAssertion)
     * [Assertion framework flexibility](#AssertionFrameworkFlexibility)
 2. [Installation](#Installation)
 3. [Changes](#Changes)
@@ -49,7 +49,7 @@ when(deathStar.fireAt(alderaan)).then(target -> {
 });
 ```
 
-### <a name="ThrownExceptiosAssertion"></a>Thrown exception assertion
+### <a name="ThrownExceptionsAssertion"></a>Thrown exception assertion
 
 In order to catch exception for an assertion we pass a lambda to the when block:
 
@@ -61,7 +61,7 @@ when(() -> deathStar.fireAt(alderaan)).then(thrownException -> {
 });
 ```
 
-### <a name="ThrownCheckedExceptiosAssertion"></a>Thrown checked exceptions assertion
+### <a name="ThrownCheckedExceptionsAssertion"></a>Thrown checked exceptions assertion
 
 If we decide to change the `fireAt` method so that it doesn't throw the `TargetAlreadyDestroyedException` the test mentioned in previous sub chapter will fail. Since `TargetAlreadyDestroyedException` is a checked exception we can use Generics to prevent that test from compiling and reduce the time required to detect the error!
 We change `then` to `thenChecked` and use `isA` matcher:
