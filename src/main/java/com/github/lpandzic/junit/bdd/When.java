@@ -2,8 +2,6 @@ package com.github.lpandzic.junit.bdd;
 
 import java.util.Optional;
 
-import static java.util.Objects.requireNonNull;
-
 /**
  * Defines behavior that is being tested.
  *
@@ -27,8 +25,6 @@ public final class When {
      * @return new {@link Then.Throws}
      */
     public <T extends Throwable> Then.Throws<T> when(ThrowableSupplier<T> throwableSupplier) {
-
-        requireNonNull(throwableSupplier);
 
         try {
             throwableSupplier.get();

@@ -35,11 +35,15 @@ public final class Bdd implements TestRule {
      */
     public static <T extends Exception> Then.Throws<T> when(ThrowableSupplier<T> throwableSupplier) {
 
-        if (bdd.get() == null) {
+        Bdd bdd = Bdd.bdd.get();
+
+        if (bdd == null) {
             throw new IllegalStateException("Bdd rule not initialized");
         }
 
-        return new When(bdd.get()).when(throwableSupplier);
+        bdd.requireThatNoUnexpectedExceptionWasThrown();
+
+        return new When(bdd).when(throwableSupplier);
     }
 
     /**
@@ -52,11 +56,15 @@ public final class Bdd implements TestRule {
      */
     public static <T> Then.Returns<T> when(T value) {
 
-        if (bdd.get() == null) {
+        Bdd bdd = Bdd.bdd.get();
+
+        if (bdd == null) {
             throw new IllegalStateException("Bdd rule not initialized");
         }
 
-        return new When(bdd.get()).when(value);
+        bdd.requireThatNoUnexpectedExceptionWasThrown();
+
+        return new When(bdd).when(value);
     }
 
     /**
