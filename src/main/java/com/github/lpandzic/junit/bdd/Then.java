@@ -34,7 +34,12 @@ public final class Then {
         public <E extends T> void thenChecked(Consumer<E> consumer) {
 
             Optional<Throwable> throwable = bdd.takeThrownException();
-            consumer.accept((E) throwable.orElse(null));
+
+            try {
+                consumer.accept((E) throwable.orElse(null));
+            }  catch (ClassCastException e) {
+                bdd.throwUnexpectedException(throwable.get());
+            }
         }
     }
 

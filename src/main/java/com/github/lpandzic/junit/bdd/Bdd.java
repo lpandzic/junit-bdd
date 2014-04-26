@@ -134,8 +134,12 @@ public final class Bdd implements TestRule {
     private void requireThatNoUnexpectedExceptionWasThrown() {
 
         if (thrownException.isPresent()) {
-            throw new IllegalStateException("Unexpected exception was thrown", thrownException.get());
+            throwUnexpectedException(thrownException.get());
         }
+    }
+
+    void throwUnexpectedException(Throwable throwable) {
+        throw new IllegalStateException("Unexpected exception was thrown", throwable);
     }
 
     private Bdd() {
