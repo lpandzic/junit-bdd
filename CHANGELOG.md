@@ -1,3 +1,7 @@
+## 1.1
+
+  - fixed a ClassCastException bug in `thenChecked` [#1](https://github.com/lpandzic/junit-bdd/issues/1)
+
 ## 1.0
 
   - project now depends on Java 8 SE
