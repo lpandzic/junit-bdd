@@ -110,7 +110,7 @@ when(deathStar.fireAt(alderaan)).then(target -> {
 <dependency>
     <groupId>com.github.lpandzic</groupId>
 	<artifactId>junit-bdd</artifactId>
-	<version>1.0</version>
+	<version>1.1</version>
 	<scope>test</scope>
 </dependency>
 ```
