@@ -11,11 +11,12 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.Is.isA;
+import static org.junit.internal.matchers.ThrowableMessageMatcher.hasMessage;
 
 /**
  * @author Lovro Pandzic
  */
-public class FeatureTest {
+public class BddIntegrationTest {
 
     @Rule
     public Bdd bdd = Bdd.initialized();
@@ -98,9 +99,52 @@ public class FeatureTest {
         expectedException.expectMessage("Unexpected exception was thrown");
         expectedException.expectCause(isA(IOException.class));
 
-
         when(() -> classUnderTest.throwsA(new IOException()));
         when(() -> classUnderTest.throwsA(new Exception()));
+    }
+
+    @Test
+    public void shouldFailWithUnexpectedExceptionForWrongCheckedException() {
+
+        class FirstException extends Exception {
+        }
+        class SecondException extends Exception {
+        }
+
+        class ClassUnderTest {
+            void method() throws FirstException, SecondException {
+
+                throw new SecondException();
+            }
+        }
+
+        expectedException.expect(IllegalStateException.class);
+        expectedException.expect(hasMessage(equalTo("Unexpected exception was thrown")));
+        expectedException.expectCause(isA(SecondException.class));
+
+        when(() -> new ClassUnderTest().method()).thenChecked((FirstException f) -> {
+        });
+    }
+
+    @Test
+    public void shouldFailWithUnexpectedExceptionForWrongRuntimeException() {
+
+        class CustomException extends Exception {
+        }
+
+        class ClassUnderTest {
+            void method() throws CustomException {
+
+                throw new IllegalStateException("failure message");
+            }
+        }
+
+        expectedException.expect(IllegalStateException.class);
+        expectedException.expectCause(isA(IllegalStateException.class));
+        expectedException.expectCause(hasMessage(equalTo("failure message")));
+
+        when(() -> new ClassUnderTest().method()).thenChecked((CustomException f) -> {
+        });
     }
 
     private static class ClassUnderTest {
