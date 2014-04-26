@@ -106,25 +106,11 @@ when(deathStar.fireAt(alderaan)).then(target -> {
 
 ### Maven
 
-Since the project has not been released to Maven Central repository yet, the following repository definition is needed for the SNAPSHOT dependency:
-```
-<repositories>
-    <repository>
-		<id>snapshots-repo</id>
-		<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		<releases><enabled>false</enabled></releases>
-		<snapshots><enabled>true</enabled></snapshots>
-	</repository>
-</repositories>
-```
-
-Latest dependency:
-
 ```
 <dependency>
     <groupId>com.github.lpandzic</groupId>
 	<artifactId>junit-bdd</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 </dependency>
 ```
 
