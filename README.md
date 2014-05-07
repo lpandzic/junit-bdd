@@ -17,9 +17,10 @@ For more information on the subject of  Behavior-driven development see the foll
     * [Checked exceptions assertion](#ThrownCheckedExceptionsAssertion)
     * [Assertion framework flexibility](#AssertionFrameworkFlexibility)
 2. [Installation](#Installation)
-3. [Changes](#Changes)
-4. [License](#License)
-5. [Credits](#Credits)
+3. [Contributing](#Contributing)
+4. [Changes](#Changes)
+5. [License](#License)
+6. [Credits](#Credits)
 
 ## <a name="Features"></a> Features
 
@@ -115,6 +116,10 @@ when(deathStar.fireAt(alderaan)).then(target -> {
 </dependency>
 ```
 
+## <a name="Contributing"></a> Contributing
+
+If you have an idea for a new feature or want to report a bug please use the [issue tracker][11]
+
 ## <a name="Changes"></a> Changes
 
 See the [Changelog][9]
@@ -130,12 +135,13 @@ Continuous Integration provided by:
 [![Powered by CloudBees](http://www.cloudbees.com/sites/default/files/Button-Powered-by-CB.png)](http://www.cloudbees.com/sites/default/files/Button-Powered-by-CB.png)
 
 [1]: http://junit-team.github.io/junit/javadoc/4.11/org/junit/Rule.html
-[2]: https://github.com/junit-team/junit
+[2]: http://github.com/junit-team/junit
 [3]: http://dannorth.net/introducing-bdd/
 [4]: http://martinfowler.com/bliki/GivenWhenThen.html
 [5]: http://en.wikipedia.org/wiki/Behavior-driven_development
-[6]: https://github.com/hamcrest/JavaHamcrest
-[7]: https://github.com/junit-team/junit/wiki/Assertions
-[8]: https://github.com/alexruiz/fest-assert-2.x
-[9]: https://github.com/lpandzic/junit-bdd/blob/master/CHANGELOG.md
-[10]: https://github.com/lpandzic/junit-bdd/blob/master/LICENSE
+[6]: http://github.com/hamcrest/JavaHamcrest
+[7]: http://github.com/junit-team/junit/wiki/Assertions
+[8]: http://github.com/alexruiz/fest-assert-2.x
+[9]: http://github.com/lpandzic/junit-bdd/blob/master/CHANGELOG.md
+[10]: http://github.com/lpandzic/junit-bdd/blob/master/LICENSE
+[11]: http://github.com/lpandzic/junit-bdd/issues?state=open
