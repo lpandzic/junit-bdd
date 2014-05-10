@@ -64,8 +64,8 @@ when(() -> deathStar.fireAt(alderaan)).then(thrownException -> {
 
 ### <a name="ThrownCheckedExceptionsAssertion"></a>Thrown checked exceptions assertion
 
-If we decide to change the `fireAt` method so that it doesn't throw the `TargetAlreadyDestroyedException` the test mentioned in previous sub chapter will fail. Since `TargetAlreadyDestroyedException` is a checked exception we can use Generics to prevent that test from compiling and reduce the time required to detect the error!
-We change `then` to `thenChecked` and use `isA` matcher:
+If we decide to change the `fireAt` method so that it doesn't throw the `TargetAlreadyDestroyedException` the test mentioned in previous sub chapter will fail, but it will still compile. Since `TargetAlreadyDestroyedException` is a checked exception we can use Generics to prevent that test from compiling and reduce the time required to detect the error!
+To use this feature change `then` to `thenChecked` and use `isA` matcher:
 
 ```java
 when(deathStar.fireAt(alderaan));
