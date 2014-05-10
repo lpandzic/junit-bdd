@@ -1,75 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>org.sonatype.oss</groupId>
-		<artifactId>oss-parent</artifactId>
-		<version>7</version>
-	</parent>
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
 
-	<groupId>com.github.lpandzic</groupId>
-	<artifactId>junit-bdd</artifactId>
-	<version>1.3-SNAPSHOT</version>
-	<packaging>jar</packaging>
+  <groupId>com.github.lpandzic</groupId>
+  <artifactId>junit-bdd</artifactId>
+  <version>1.3-SNAPSHOT</version>
+  <packaging>jar</packaging>
 
-	<name>JUnit-BDD</name>
-	<description>Provides a JUnit test rule which enables Behavior-driven development (BDD) style testing.</description>
-	<url>http://github.com/lpandzic/junit-bdd</url>
-	<inceptionYear>2014</inceptionYear>
+  <name>JUnit-BDD</name>
+  <description>Provides a JUnit test rule which enables Behavior-driven development (BDD) style testing.</description>
+  <url>http://github.com/lpandzic/junit-bdd</url>
+  <inceptionYear>2014</inceptionYear>
 
-	<licenses>
-		<license>
-			<name>The GNU Lesser General Public License, version 2.1</name>
-			<url>http://opensource.org/licenses/LGPL-2.1</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
+  <licenses>
+    <license>
+      <name>The GNU Lesser General Public License, version 2.1</name>
+      <url>http://opensource.org/licenses/LGPL-2.1</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
 
-	<developers>
-		<developer>
-			<id>lpandzic</id>
-			<name>Lovro Pandžić</name>
-			<email>lovro.pandzic@gmail.com</email>
-		</developer>
-	</developers>
+  <developers>
+    <developer>
+      <id>lpandzic</id>
+      <name>Lovro Pandžić</name>
+      <email>lovro.pandzic@gmail.com</email>
+    </developer>
+  </developers>
 
-	<scm>
-		<connection>scm:git:git//github.com:lpandzic/junit-bdd.git</connection>
-		<developerConnection>scm:git:git@github.com:lpandzic/junit-bdd.git</developerConnection>
-		<url>https://github.com/lpandzic/junit-bdd</url>
-	</scm>
+  <scm>
+    <connection>scm:git:git//github.com:lpandzic/junit-bdd.git</connection>
+    <developerConnection>scm:git:git@github.com:lpandzic/junit-bdd.git</developerConnection>
+    <url>https://github.com/lpandzic/junit-bdd</url>
+  </scm>
 
-	<issueManagement>
-		<system>GitHub Issues</system>
-		<url>https://github.com/lpandzic/junit-bdd/issues</url>
-	</issueManagement>
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/lpandzic/junit-bdd/issues</url>
+  </issueManagement>
 
-	<ciManagement>
-		<system>Jenkins</system>
-		<url>https://lpandzic.ci.cloudbees.com/job/junit-bdd/</url>
-	</ciManagement>
+  <ciManagement>
+    <system>Jenkins</system>
+    <url>https://lpandzic.ci.cloudbees.com/job/junit-bdd/</url>
+  </ciManagement>
 
-	<properties>
-		<!-- DEPENDENCY VERSIONS -->
-		<junit.version>4.11</junit.version>
+  <properties>
+    <!-- DEPENDENCY VERSIONS -->
+    <junit.version>4.11</junit.version>
     <hamcrest-core.version>1.3</hamcrest-core.version>
 
-		<!-- PLUGIN VERSIONS -->
-		<maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
-		<maven-source-plugin.version>2.2.1</maven-source-plugin.version>
-		<maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
-		<maven-enforcer-plugin.version>1.3.1</maven-enforcer-plugin.version>
-		<maven-release-plugin.version>2.3.2</maven-release-plugin.version>
-		<maven-gpg-plugin.version>1.4</maven-gpg-plugin.version>
+    <!-- PLUGIN VERSIONS -->
+    <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
+    <maven-source-plugin.version>2.2.1</maven-source-plugin.version>
+    <maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
+    <maven-enforcer-plugin.version>1.3.1</maven-enforcer-plugin.version>
+    <maven-release-plugin.version>2.3.2</maven-release-plugin.version>
+    <maven-gpg-plugin.version>1.4</maven-gpg-plugin.version>
 
-		<!-- OTHER PROPERTIES -->
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.report.outputEncoding>UTF-8</project.report.outputEncoding>
-		<java.version>1.8</java.version>
+    <!-- OTHER PROPERTIES -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.report.outputEncoding>UTF-8</project.report.outputEncoding>
+    <java.version>1.8</java.version>
   </properties>
 
-	<dependencies>
+  <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -95,68 +96,68 @@
       <version>2.0M10</version>
       <scope>test</scope>
     </dependency>
-	</dependencies>
+  </dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-enforcer-plugin</artifactId>
-				<version>${maven-enforcer-plugin.version}</version>
-				<executions>
-					<execution>
-						<id>enforce-java</id>
-						<goals>
-							<goal>enforce</goal>
-						</goals>
-						<configuration>
-							<rules>
-								<requireJavaVersion>
-									<version>${java.version}</version>
-								</requireJavaVersion>
-							</rules>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>${maven-enforcer-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>enforce-java</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireJavaVersion>
+                  <version>${java.version}</version>
+                </requireJavaVersion>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${maven-compiler-plugin.version}</version>
-				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-				</configuration>
-			</plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler-plugin.version}</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+        </configuration>
+      </plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>${maven-source-plugin.version}</version>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>${maven-source-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>${maven-javadoc-plugin.version}</version>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>${maven-javadoc-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>
