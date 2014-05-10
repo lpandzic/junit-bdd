@@ -19,6 +19,67 @@ import java.util.Optional;
  * public Bdd bdd = Bdd.initialized();
  * </pre>
  *
+ * <p><strong>Return value assertion</strong></p>
+ * For a given class {@code DeathStar} that contains method with signature {@code Target fireAt(Target target) throws
+ * TargetAlreadyDestroyedException} where {@code TargetAlreadyDestroyedException} is a checked exception,
+ * we can do the following value assertion:
+ * <pre>
+ * when(deathStar.fireAt(alderaan)).then(target -> {
+ *     assertThat(target.isDestroyed(), is(true));
+ *     assertThat(target, is(alderaan));
+ *     assertThat(target, is(not(coruscant)));
+ * });
+ * </pre>
+ *
+ * <p><strong>Thrown exception assertion</strong></p>
+ * In order to catch exception for an assertion we pass a lambda to the when block:
+ * <pre>
+ * when(deathStar.fireAt(alderaan));
+ * when(() -> deathStar.fireAt(alderaan)).then(thrownException -> {
+ *     assertThat(thrownException, is(instanceOf(TargetAlreadyDestroyedException.class)));
+ *     assertThat(thrownException.getMessage(), is(equalTo("Cannot fire at a destroyed " + alderaan)));
+ * });
+ * </pre>
+ *
+ * <p><strong>Thrown checked exceptions assertion</strong></p>
+ * If we decide to change the {@code fireAt} method so that it doesn't throw the {@code
+ * TargetAlreadyDestroyedException} the test mentioned in previous sub chapter will fail,
+ * but it will still compile. Since {@code TargetAlreadyDestroyedException} is a checked exception we can use
+ * Generics to prevent that test from compiling and reduce the time required to detect the error! To use this feature
+ * change {@code then} to {@code thenChecked} and use {@code isA} matcher:
+ * <pre>
+ * when(deathStar.fireAt(alderaan));
+ * when(() -> deathStar.fireAt(alderaan)).thenChecked(thrownException -> {
+ *     assertThat(thrownException, isA(TargetAlreadyDestroyedException.class));
+ *     assertThat(thrownException.getMessage(), is(equalTo("Cannot fire at a destroyed " + alderaan)));
+ * });
+ * </pre>
+ * <p>Now if we decide to change the signature of fireAt not to include TargetAlreadyDestroyedException we get a
+ * compilation error.</p>
+ *
+ * <p><strong>Assertion framework flexibility</strong></p>
+ * Although Hamcrest was used in previous examples you are free to use any Java assertion framework. For example,
+ * the first testing example can be translated to:
+ * <ul>
+ * <li><a href="http://github.com/junit-team/junit/wiki/Assertions">plain JUnit assertions</a>
+ * <pre>
+ * when(deathStar.fireAt(alderaan)).then(target -> {
+ *     assertTrue(target.isDestroyed());
+ *     assertEquals(target, alderaan);
+ *     assertNotEquals(target, coruscant);
+ * });
+ * </pre></li>
+ * <li><a href="http://github.com/alexruiz/fest-assert-2.x">FEST Fluent Assertions</a>
+ * <pre>
+ * when(deathStar.fireAt(alderaan)).then(target -> {
+ *     assertThat(target.isDestroyed()).isTrue();
+ *     assertThat(target).isEqualTo(alderaan);
+ *     assertThat(target).isNotEqualTo(coruscant);
+ * });
+ * </pre></li>
+ * </ul>
+ * </pre>
+ *
  * @author Lovro Pandzic
  * @see <a href="http://dannorth.net/introducing-bdd/">Introducing Bdd</a>
  * @see <a href="http://martinfowler.com/bliki/GivenWhenThen.html">GivenWhenThen article by M. Fowler</a>
@@ -125,6 +186,11 @@ public final class Bdd implements TestRule {
         return thrownException;
     }
 
+    void throwUnexpectedException(Throwable throwable) {
+
+        throw new IllegalStateException("Unexpected exception was thrown", throwable);
+    }
+
     /**
      * Throws {@link #thrownException} if present.
      *
@@ -136,10 +202,6 @@ public final class Bdd implements TestRule {
         if (thrownException.isPresent()) {
             throwUnexpectedException(thrownException.get());
         }
-    }
-
-    void throwUnexpectedException(Throwable throwable) {
-        throw new IllegalStateException("Unexpected exception was thrown", throwable);
     }
 
     private Bdd() {
