@@ -23,23 +23,23 @@ import java.util.Optional;
  * For a given class {@code DeathStar} that contains method with signature {@code Target fireAt(Target target) throws
  * TargetAlreadyDestroyedException} where {@code TargetAlreadyDestroyedException} is a checked exception,
  * we can do the following value assertion:
- * <pre>
+ * <pre>{@code
  * when(deathStar.fireAt(alderaan)).then(target -> {
  *     assertThat(target.isDestroyed(), is(true));
  *     assertThat(target, is(alderaan));
  *     assertThat(target, is(not(coruscant)));
  * });
- * </pre>
+ * }</pre>
  *
  * <p><strong>Thrown exception assertion</strong></p>
  * In order to catch exception for an assertion we pass a lambda to the when block:
- * <pre>
+ * <pre>{@code
  * when(deathStar.fireAt(alderaan));
  * when(() -> deathStar.fireAt(alderaan)).then(thrownException -> {
  *     assertThat(thrownException, is(instanceOf(TargetAlreadyDestroyedException.class)));
  *     assertThat(thrownException.getMessage(), is(equalTo("Cannot fire at a destroyed " + alderaan)));
  * });
- * </pre>
+ * }</pre>
  *
  * <p><strong>Thrown checked exceptions assertion</strong></p>
  * If we decide to change the {@code fireAt} method so that it doesn't throw the {@code
@@ -47,13 +47,13 @@ import java.util.Optional;
  * but it will still compile. Since {@code TargetAlreadyDestroyedException} is a checked exception we can use
  * Generics to prevent that test from compiling and reduce the time required to detect the error! To use this feature
  * change {@code then} to {@code thenChecked} and use {@code isA} matcher:
- * <pre>
+ * <pre>{@code
  * when(deathStar.fireAt(alderaan));
  * when(() -> deathStar.fireAt(alderaan)).thenChecked(thrownException -> {
  *     assertThat(thrownException, isA(TargetAlreadyDestroyedException.class));
  *     assertThat(thrownException.getMessage(), is(equalTo("Cannot fire at a destroyed " + alderaan)));
  * });
- * </pre>
+ * }</pre>
  * <p>Now if we decide to change the signature of fireAt not to include TargetAlreadyDestroyedException we get a
  * compilation error.</p>
  *
@@ -62,23 +62,22 @@ import java.util.Optional;
  * the first testing example can be translated to:
  * <ul>
  * <li><a href="http://github.com/junit-team/junit/wiki/Assertions">plain JUnit assertions</a>
- * <pre>
+ * <pre>{@code
  * when(deathStar.fireAt(alderaan)).then(target -> {
  *     assertTrue(target.isDestroyed());
  *     assertEquals(target, alderaan);
  *     assertNotEquals(target, coruscant);
  * });
- * </pre></li>
+ * }</pre></li>
  * <li><a href="http://github.com/alexruiz/fest-assert-2.x">FEST Fluent Assertions</a>
- * <pre>
+ * <pre>{@code
  * when(deathStar.fireAt(alderaan)).then(target -> {
  *     assertThat(target.isDestroyed()).isTrue();
  *     assertThat(target).isEqualTo(alderaan);
  *     assertThat(target).isNotEqualTo(coruscant);
  * });
- * </pre></li>
+ * }</pre></li>
  * </ul>
- * </pre>
  *
  * @author Lovro Pandzic
  * @see <a href="http://dannorth.net/introducing-bdd/">Introducing Bdd</a>
