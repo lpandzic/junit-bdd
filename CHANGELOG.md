@@ -1,3 +1,7 @@
+## 1.2
+
+  - improved javadoc on Bdd [#4](https://github.com/lpandzic/junit-bdd/issues/4)
+
 ## 1.1
 
   - fixed a ClassCastException bug in `thenChecked` [#1](https://github.com/lpandzic/junit-bdd/issues/1)
