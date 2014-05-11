@@ -29,4 +29,16 @@ public class AssertJExampleTest {
         });
     }
 
+    @Test
+    public void shouldNotBeAbleToFireAtADestroyedTarget() throws TargetAlreadyDestroyedException {
+
+        DeathStar deathStar = new DeathStar();
+
+when(deathStar.fireAt(alderaan));
+when(() -> deathStar.fireAt(alderaan)).then(thrownException -> {
+    assertThat(thrownException).isExactlyInstanceOf(TargetAlreadyDestroyedException.class);
+    assertThat(thrownException.getMessage()).isEqualTo("Cannot fire at a destroyed " + alderaan);
+});
+    }
+
 }

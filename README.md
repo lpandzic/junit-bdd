@@ -81,27 +81,45 @@ Now if we decide to change the signature of `fireAt` not to include `TargetAlrea
 
 Although Hamcrest was used in previous examples you are free to use any Java assertion framework.
 
-For example, the first testing example can be translated to:
+For example, the first two testing examples can be translated to:
 
 * [plain JUnit assertions][7]
 
-```java
-when(deathStar.fireAt(alderaan)).then(target -> {
-    assertTrue(target.isDestroyed());
-    assertEquals(target, alderaan);
-    assertNotEquals(target, coruscant);
-});
-```
+    1. Return value assertion
+    ```java
+    when(deathStar.fireAt(alderaan)).then(target -> {
+        assertTrue(target.isDestroyed());
+        assertEquals(target, alderaan);
+        assertNotEquals(target, coruscant);
+    });
+    ```
+    2. Thrown exception assertion
+    ```java
+    when(deathStar.fireAt(alderaan));
+    when(() -> deathStar.fireAt(alderaan)).then(thrownException -> {
+        assertEquals(TargetAlreadyDestroyedException.class, thrownException.getClass());
+        assertEquals("Cannot fire at a destroyed " + alderaan, thrownException.getMessage());
+    });
+    ```
 
 * [AssertJ][8]
 
-```java
-when(deathStar.fireAt(alderaan)).then(target -> {
-    assertThat(target.isDestroyed()).isTrue();
-    assertThat(target).isEqualTo(alderaan);
-    assertThat(target).isNotEqualTo(coruscant);
-});
-```
+    1. Return value assertion
+    ```java
+    when(deathStar.fireAt(alderaan)).then(target -> {
+        assertThat(target.isDestroyed()).isTrue();
+        assertThat(target).isEqualTo(alderaan);
+        assertThat(target).isNotEqualTo(coruscant);
+    });
+    ```
+    2. Thrown exception assertion
+    ```java
+    when(deathStar.fireAt(alderaan));
+    when(() -> deathStar.fireAt(alderaan)).then(thrownException -> {
+        assertThat(thrownException).isExactlyInstanceOf(TargetAlreadyDestroyedException.class);
+        assertThat(thrownException.getMessage()).isEqualTo("Cannot fire at a destroyed " + alderaan);
+    });
+    ```
 
 ## <a name="Installation"></a> Installation
 
