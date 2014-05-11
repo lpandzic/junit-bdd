@@ -84,7 +84,8 @@ Although Hamcrest was used in previous examples you are free to use any Java ass
 For example, the first two testing examples can be translated to:
 
 * [plain JUnit assertions][7]
-    1. Return value assertion
+
+    - Return value assertion
     ```java
     when(deathStar.fireAt(alderaan)).then(target -> {
         assertTrue(target.isDestroyed());
@@ -92,7 +93,7 @@ For example, the first two testing examples can be translated to:
         assertNotEquals(target, coruscant);
     });
     ```
-    2. Thrown exception assertion
+    - Thrown exception assertion
     ```java
     when(deathStar.fireAt(alderaan));
     when(() -> deathStar.fireAt(alderaan)).then(thrownException -> {
@@ -102,7 +103,8 @@ For example, the first two testing examples can be translated to:
     ```
 
 * [AssertJ][8]
-    1. Return value assertion
+
+    - Return value assertion
     ```java
     when(deathStar.fireAt(alderaan)).then(target -> {
         assertThat(target.isDestroyed()).isTrue();
@@ -110,7 +112,8 @@ For example, the first two testing examples can be translated to:
         assertThat(target).isNotEqualTo(coruscant);
     });
     ```
-    2. Thrown exception assertion
+
+    - Thrown exception assertion
     ```java
     when(deathStar.fireAt(alderaan));
     when(() -> deathStar.fireAt(alderaan)).then(thrownException -> {
