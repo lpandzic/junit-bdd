@@ -4,9 +4,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import static com.github.lpandzic.junit.bdd.Bdd.when;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * @author Lovro Pandzic
@@ -28,6 +26,18 @@ public class JUnitExampleTest {
             assertTrue(target.isDestroyed());
             assertEquals(target, alderaan);
             assertNotEquals(target, coruscant);
+        });
+    }
+
+    @Test
+    public void shouldNotBeAbleToFireAtADestroyedTarget() throws TargetAlreadyDestroyedException {
+
+        DeathStar deathStar = new DeathStar();
+
+        when(deathStar.fireAt(alderaan));
+        when(() -> deathStar.fireAt(alderaan)).then(thrownException -> {
+            assertEquals(TargetAlreadyDestroyedException.class, thrownException.getClass());
+            assertEquals("Cannot fire at a destroyed " + alderaan, thrownException.getMessage());
         });
     }
 }

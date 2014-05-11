@@ -81,27 +81,46 @@ Now if we decide to change the signature of `fireAt` not to include `TargetAlrea
 
 Although Hamcrest was used in previous examples you are free to use any Java assertion framework.
 
-For example, the first testing example can be translated to:
+For example, the first two testing examples can be translated to:
 
 * [plain JUnit assertions][7]
 
-```java
-when(deathStar.fireAt(alderaan)).then(target -> {
-    assertTrue(target.isDestroyed());
-    assertEquals(target, alderaan);
-    assertNotEquals(target, coruscant);
-});
-```
+    - Return value assertion
+    ```java
+    when(deathStar.fireAt(alderaan)).then(target -> {
+        assertTrue(target.isDestroyed());
+        assertEquals(target, alderaan);
+        assertNotEquals(target, coruscant);
+    });
+    ```
+    - Thrown exception assertion
+    ```java
+    when(deathStar.fireAt(alderaan));
+    when(() -> deathStar.fireAt(alderaan)).then(thrownException -> {
+        assertEquals(TargetAlreadyDestroyedException.class, thrownException.getClass());
+        assertEquals("Cannot fire at a destroyed " + alderaan, thrownException.getMessage());
+    });
+    ```
 
-* [FEST Fluent Assertions][8] 
+* [AssertJ][8]
 
-```java
-when(deathStar.fireAt(alderaan)).then(target -> {
-    assertThat(target.isDestroyed()).isTrue();
-    assertThat(target).isEqualTo(alderaan);
-    assertThat(target).isNotEqualTo(coruscant);
-});
-```
+    - Return value assertion
+    ```java
+    when(deathStar.fireAt(alderaan)).then(target -> {
+        assertThat(target.isDestroyed()).isTrue();
+        assertThat(target).isEqualTo(alderaan);
+        assertThat(target).isNotEqualTo(coruscant);
+    });
+    ```
+
+    - Thrown exception assertion
+    ```java
+    when(deathStar.fireAt(alderaan));
+    when(() -> deathStar.fireAt(alderaan)).then(thrownException -> {
+        assertThat(thrownException).isExactlyInstanceOf(TargetAlreadyDestroyedException.class);
+        assertThat(thrownException.getMessage()).isEqualTo("Cannot fire at a destroyed " + alderaan);
+    });
+    ```
 
 ## <a name="Installation"></a> Installation
 
@@ -141,7 +160,7 @@ Continuous Integration provided by:
 [5]: http://en.wikipedia.org/wiki/Behavior-driven_development
 [6]: http://github.com/hamcrest/JavaHamcrest
 [7]: http://github.com/junit-team/junit/wiki/Assertions
-[8]: http://github.com/alexruiz/fest-assert-2.x
+[8]: http://joel-costigliola.github.io/assertj/index.html
 [9]: http://github.com/lpandzic/junit-bdd/blob/master/CHANGELOG.md
 [10]: http://github.com/lpandzic/junit-bdd/blob/master/LICENSE
 [11]: http://github.com/lpandzic/junit-bdd/issues?state=open

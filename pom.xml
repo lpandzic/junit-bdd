@@ -54,7 +54,10 @@
   <properties>
     <!-- DEPENDENCY VERSIONS -->
     <junit.version>4.11</junit.version>
+
+    <!-- TEST DEPENDENCY VERSIONS -->
     <hamcrest-core.version>1.3</hamcrest-core.version>
+    <assertj-core.version>1.5.0</assertj-core.version>
 
     <!-- PLUGIN VERSIONS -->
     <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
@@ -91,9 +94,9 @@
     </dependency>
 
     <dependency>
-      <groupId>org.easytesting</groupId>
-      <artifactId>fest-assert-core</artifactId>
-      <version>2.0M10</version>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>${assertj-core.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
