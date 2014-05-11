@@ -84,7 +84,6 @@ Although Hamcrest was used in previous examples you are free to use any Java ass
 For example, the first two testing examples can be translated to:
 
 * [plain JUnit assertions][7]
-
     1. Return value assertion
     ```java
     when(deathStar.fireAt(alderaan)).then(target -> {
@@ -103,7 +102,6 @@ For example, the first two testing examples can be translated to:
     ```
 
 * [AssertJ][8]
-
     1. Return value assertion
     ```java
     when(deathStar.fireAt(alderaan)).then(target -> {
