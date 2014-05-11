@@ -4,12 +4,12 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import static com.github.lpandzic.junit.bdd.Bdd.when;
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Lovro Pandzic
  */
-public class FestAssertExampleTest {
+public class AssertJExampleTest {
 
     @Rule
     public Bdd bdd = Bdd.initialized();

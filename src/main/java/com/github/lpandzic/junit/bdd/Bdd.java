@@ -69,7 +69,7 @@ import java.util.Optional;
  *     assertNotEquals(target, coruscant);
  * });
  * }</pre></li>
- * <li><a href="http://github.com/alexruiz/fest-assert-2.x">FEST Fluent Assertions</a>
+ * <li><a href="http://joel-costigliola.github.io/assertj/index.html">AssertJ</a>
  * <pre>{@code
  * when(deathStar.fireAt(alderaan)).then(target -> {
  *     assertThat(target.isDestroyed()).isTrue();

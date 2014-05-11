@@ -93,7 +93,7 @@ when(deathStar.fireAt(alderaan)).then(target -> {
 });
 ```
 
-* [FEST Fluent Assertions][8] 
+* [AssertJ][8]
 
 ```java
 when(deathStar.fireAt(alderaan)).then(target -> {
@@ -141,7 +141,7 @@ Continuous Integration provided by:
 [5]: http://en.wikipedia.org/wiki/Behavior-driven_development
 [6]: http://github.com/hamcrest/JavaHamcrest
 [7]: http://github.com/junit-team/junit/wiki/Assertions
-[8]: http://github.com/alexruiz/fest-assert-2.x
+[8]: http://joel-costigliola.github.io/assertj/index.html
 [9]: http://github.com/lpandzic/junit-bdd/blob/master/CHANGELOG.md
 [10]: http://github.com/lpandzic/junit-bdd/blob/master/LICENSE
 [11]: http://github.com/lpandzic/junit-bdd/issues?state=open
