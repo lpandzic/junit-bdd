@@ -62,6 +62,8 @@ import java.util.Optional;
  * the first testing example can be translated to:
  * <ul>
  * <li><a href="http://github.com/junit-team/junit/wiki/Assertions">plain JUnit assertions</a>
+ * <ol>
+ * <li>Return value assertion
  * <pre>{@code
  * when(deathStar.fireAt(alderaan)).then(target -> {
  *     assertTrue(target.isDestroyed());
@@ -69,7 +71,18 @@ import java.util.Optional;
  *     assertNotEquals(target, coruscant);
  * });
  * }</pre></li>
+ * <li>Thrown exception assertion
+ * <pre>{@code
+ * when(deathStar.fireAt(alderaan));
+ * when(() -> deathStar.fireAt(alderaan)).then(thrownException -> {
+ *     assertEquals(TargetAlreadyDestroyedException.class, thrownException.getClass());
+ *     assertEquals("Cannot fire at a destroyed " + alderaan, thrownException.getMessage());
+ * });
+ * }</pre></li>
+ * </ol>
  * <li><a href="http://joel-costigliola.github.io/assertj/index.html">AssertJ</a>
+ * <ol>
+ * <li>Return value assertion
  * <pre>{@code
  * when(deathStar.fireAt(alderaan)).then(target -> {
  *     assertThat(target.isDestroyed()).isTrue();
@@ -77,6 +90,16 @@ import java.util.Optional;
  *     assertThat(target).isNotEqualTo(coruscant);
  * });
  * }</pre></li>
+ * <li>Thrown exception assertion
+ * <pre>{@code
+ * when(deathStar.fireAt(alderaan));
+ * when(() -> deathStar.fireAt(alderaan)).then(thrownException -> {
+ *     assertThat(thrownException).isExactlyInstanceOf(TargetAlreadyDestroyedException.class);
+ *     assertThat(thrownException.getMessage()).isEqualTo("Cannot fire at a destroyed " + alderaan);
+ * });
+ * }</pre></li>
+ * </ol>
+ * </li>
  * </ul>
  *
  * @author Lovro Pandzic
