@@ -1,3 +1,7 @@
+## 1.3
+
+  - replaced FEST assert examples with AssertJ in javadoc [#3](https://github.com/lpandzic/junit-bdd/issues/3)
+
 ## 1.2
 
   - improved javadoc on Bdd [#4](https://github.com/lpandzic/junit-bdd/issues/4)
