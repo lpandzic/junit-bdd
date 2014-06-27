@@ -4,7 +4,7 @@
 
 JUnit-BDD provides a simple and fluent API for structuring test code within when and then blocks used in Behavior-driven development.
 
-This projects depends on Java 8 SE and [JUnit][2] (with transitive dependencies excluded).
+This projects depends only on Java 8 SE.
 
 For more information on the subject of  Behavior-driven development see the following links: [Introducing BDD][3], [GivenWhenThen article by M. Fowler][4] or [Wikipedia article][5].
 
