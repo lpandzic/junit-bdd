@@ -167,10 +167,11 @@ public final class Bdd {
         return thrownException;
     }
 
-    static void throwUnexpectedException(Optional<Throwable> throwable) {
+    @SuppressWarnings("unchecked")
+    static <T extends Throwable> void throwUnexpectedException(Optional<Throwable> throwable) throws T {
 
         if (throwable.isPresent()) {
-            throw new IllegalStateException("Unexpected exception was thrown", throwable.get());
+            throw (T) throwable.get();
         }
     }
 
