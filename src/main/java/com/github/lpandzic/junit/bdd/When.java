@@ -9,11 +9,7 @@ import java.util.Optional;
  */
 public final class When {
 
-    private final Bdd bdd;
-
-    public When(Bdd bdd) {
-
-        this.bdd = bdd;
+    When() {
     }
 
     /**
@@ -29,10 +25,10 @@ public final class When {
         try {
             throwableSupplier.get();
         } catch (Throwable t) {
-            bdd.putThrownException(t);
+            Bdd.putThrownException(t);
         }
 
-        return new Then.Throws<>(bdd);
+        return new Then.Throws<>();
     }
 
     /**

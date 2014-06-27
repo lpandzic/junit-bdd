@@ -17,29 +17,29 @@ public final class Then {
      */
     public static final class Throws<T extends Throwable> {
 
-        private final Bdd bdd;
-
-        public Throws(Bdd bdd) {
-
-            this.bdd = bdd;
+        Throws() {
         }
 
         public void then(Consumer<Throwable> consumer) {
 
-            Optional<Throwable> throwable = bdd.takeThrownException();
+            Optional<Throwable> throwable = Bdd.takeThrownException();
             consumer.accept(throwable.orElse(null));
         }
 
         @SuppressWarnings("unchecked")
         public <E extends T> void thenChecked(Consumer<E> consumer) {
 
-            Optional<Throwable> throwable = bdd.takeThrownException();
+            Optional<Throwable> throwable = Bdd.takeThrownException();
 
             try {
                 consumer.accept((E) throwable.orElse(null));
             }  catch (ClassCastException e) {
-                bdd.throwUnexpectedException(throwable.get());
+                Bdd.throwUnexpectedException(throwable);
             }
+        }
+
+        public void thenShouldNotThrow() {
+            Bdd.requireThatNoUnexpectedExceptionWasThrown();
         }
     }
 
@@ -52,7 +52,7 @@ public final class Then {
 
         private final Optional<T> value;
 
-        public Returns(Optional<T> value) {
+        Returns(Optional<T> value) {
 
             this.value = value;
         }

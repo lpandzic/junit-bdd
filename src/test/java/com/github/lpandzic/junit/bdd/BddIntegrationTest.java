@@ -7,7 +7,8 @@ import org.junit.rules.ExpectedException;
 import java.io.IOException;
 
 import static com.github.lpandzic.junit.bdd.Bdd.when;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.Is.isA;
@@ -17,9 +18,6 @@ import static org.junit.internal.matchers.ThrowableMessageMatcher.hasMessage;
  * @author Lovro Pandzic
  */
 public class BddIntegrationTest {
-
-    @Rule
-    public Bdd bdd = Bdd.initialized();
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none().handleAssertionErrors();
@@ -38,9 +36,9 @@ public class BddIntegrationTest {
         expectedException.handleAssertionErrors();
         expectedException.expect(AssertionError.class);
 
-        when(() -> classUnderTest.throwsA(new IOException())).then(e -> assertThat(e, is(instanceOf(NullPointerException
-                                                                                                            .class))
-                                                                                  ));
+        when(() -> classUnderTest.throwsA(new IOException())).then(e -> assertThat(e,
+                                                                                   is(instanceOf(NullPointerException
+                                                                                                         .class))));
     }
 
     @Test
@@ -77,7 +75,7 @@ public class BddIntegrationTest {
         expectedException.expectMessage("Unexpected exception was thrown");
         expectedException.expectCause(isA(Exception.class));
 
-        when(() -> classUnderTest.throwsA(new Exception()));
+        when(() -> classUnderTest.throwsA(new Exception())).thenShouldNotThrow();
     }
 
     @Test

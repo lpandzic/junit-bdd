@@ -1,6 +1,5 @@
 package com.github.lpandzic.junit.bdd;
 
-import org.junit.Rule;
 import org.junit.Test;
 
 import static com.github.lpandzic.junit.bdd.Bdd.when;
@@ -15,9 +14,6 @@ import static org.hamcrest.core.IsEqual.equalTo;
  * @author Lovro Pandzic
  */
 public class HamcrestExampleTest {
-
-    @Rule
-    public Bdd bdd = Bdd.initialized();
 
     private Target alderaan = Target.ofName("Alderaan");
     private Target coruscant = Target.ofName("Coruscant");
