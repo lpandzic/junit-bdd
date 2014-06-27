@@ -104,7 +104,7 @@ public final class Bdd {
      * Used for specifying behavior that should throw an throwable.
      *
      * <p><strong>Note: Not defining then inside the test after calling this method will cause throwable to be
-     * silently swallowed and can cause subsequent test to fail on {@link #requireThatNoUnexpectedExceptionWasThrown().
+     * silently swallowed and can cause subsequent test to fail on {@link #requireThatNoUnexpectedExceptionWasThrown()}.
      * }</strong></p>
      *
      * @param throwableSupplier supplier or throwable
