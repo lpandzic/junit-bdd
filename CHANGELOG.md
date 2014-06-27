@@ -1,6 +1,6 @@
 ## 2.0
 
-  - removed JUnit TestRule from Bdd - it is no longer required (nor possible) to define Bdd as a JUnit TestRule
+  - **Breaking change:** removed JUnit TestRule from Bdd - it is no longer required (nor possible) to define Bdd as a JUnit TestRule
   - changed JUnit dependency scope to test - JUnit Bdd is now dependency free for users!
 
 ## 1.3

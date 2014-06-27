@@ -12,7 +12,6 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.Is.isA;
-import static org.junit.internal.matchers.ThrowableMessageMatcher.hasMessage;
 
 /**
  * @author Lovro Pandzic
@@ -71,9 +70,7 @@ public class BddIntegrationTest {
     @Test
     public void shouldFailWhenExceptionProviderThrowsAUncheckedException() throws Exception {
 
-        expectedException.expect(IllegalStateException.class);
-        expectedException.expectMessage("Unexpected exception was thrown");
-        expectedException.expectCause(isA(Exception.class));
+        expectedException.expect(isA(Exception.class));
 
         when(() -> classUnderTest.throwsA(new Exception())).thenShouldNotThrow();
     }
@@ -93,9 +90,7 @@ public class BddIntegrationTest {
     @Test
     public void shouldFailOnFirstWhenWhenTwoWhensFail() {
 
-        expectedException.expect(IllegalStateException.class);
-        expectedException.expectMessage("Unexpected exception was thrown");
-        expectedException.expectCause(isA(IOException.class));
+        expectedException.expect(isA(IOException.class));
 
         when(() -> classUnderTest.throwsA(new IOException()));
         when(() -> classUnderTest.throwsA(new Exception()));
@@ -116,9 +111,7 @@ public class BddIntegrationTest {
             }
         }
 
-        expectedException.expect(IllegalStateException.class);
-        expectedException.expect(hasMessage(equalTo("Unexpected exception was thrown")));
-        expectedException.expectCause(isA(SecondException.class));
+        expectedException.expect(SecondException.class);
 
         when(() -> new ClassUnderTest().method()).thenChecked((FirstException f) -> {
         });
@@ -137,9 +130,8 @@ public class BddIntegrationTest {
             }
         }
 
-        expectedException.expect(IllegalStateException.class);
-        expectedException.expectCause(isA(IllegalStateException.class));
-        expectedException.expectCause(hasMessage(equalTo("failure message")));
+        expectedException.expect(isA(IllegalStateException.class));
+        expectedException.expectMessage(equalTo("failure message"));
 
         when(() -> new ClassUnderTest().method()).thenChecked((CustomException f) -> {
         });
