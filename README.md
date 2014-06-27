@@ -126,7 +126,7 @@ For example, the first two testing examples can be translated to:
 <dependency>
     <groupId>com.github.lpandzic</groupId>
 	<artifactId>junit-bdd</artifactId>
-	<version>1.3</version>
+	<version>2.0</version>
 	<scope>test</scope>
 </dependency>
 ```
