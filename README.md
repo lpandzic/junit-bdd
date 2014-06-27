@@ -2,7 +2,7 @@
 
 [![Build Status](https://lpandzic.ci.cloudbees.com/buildStatus/icon?job=junit-bdd)](https://lpandzic.ci.cloudbees.com/job/junit-bdd/)
 
-JUnit-BDD is a JUnit [Rule][1] which provides a simple and fluent API that gives you a way of structuring your test code within when and then blocks used in Behavior-driven development.
+JUnit-BDD provides a simple and fluent API for structuring test code within when and then blocks used in Behavior-driven development.
 
 This projects depends on Java 8 SE and [JUnit][2] (with transitive dependencies excluded).
 
@@ -26,14 +26,10 @@ For more information on the subject of  Behavior-driven development see the foll
 
 ### <a name="Introduction"></a>Introduction
 
-Testing with JUnit-BDD starts by defining a JUnit test class that contains following rule definition:
+Following static import is useful for simpler syntax when using JUnit-BDD:
 
 ```java
-import com.github.lpandzic.junit.bdd.Bdd;
-import static com.github.lpandzic.junit.bdd.Bdd.when;
-
-@Rule
-public Bdd bdd = Bdd.initialized();
+ import static com.github.lpandzic.junit.bdd.Bdd.when;
 ```
 
 Note: in the following examples [Hamcrest][6] is used for assertions but you [are free to use any assertion framework you like](#AssertionFrameworkFlexibility).
@@ -153,7 +149,6 @@ Continuous Integration provided by:
 
 [![Powered by CloudBees](http://www.cloudbees.com/sites/default/files/Button-Powered-by-CB.png)](http://www.cloudbees.com/sites/default/files/Button-Powered-by-CB.png)
 
-[1]: http://junit-team.github.io/junit/javadoc/4.11/org/junit/Rule.html
 [2]: http://github.com/junit-team/junit
 [3]: http://dannorth.net/introducing-bdd/
 [4]: http://martinfowler.com/bliki/GivenWhenThen.html

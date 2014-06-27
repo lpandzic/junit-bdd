@@ -1,6 +1,5 @@
 package com.github.lpandzic.junit.bdd;
 
-import org.junit.Rule;
 import org.junit.Test;
 
 import static com.github.lpandzic.junit.bdd.Bdd.when;
@@ -10,9 +9,6 @@ import static org.junit.Assert.*;
  * @author Lovro Pandzic
  */
 public class JUnitExampleTest {
-
-    @Rule
-    public Bdd bdd = Bdd.initialized();
 
     private Target alderaan = Target.ofName("Alderaan");
     private Target coruscant = Target.ofName("Coruscant");

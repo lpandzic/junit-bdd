@@ -1,22 +1,14 @@
 package com.github.lpandzic.junit.bdd;
 
-import org.junit.rules.TestRule;
-import org.junit.runner.Description;
-import org.junit.runners.model.Statement;
-
 import java.util.Optional;
 
 /**
- * The Bdd is a {@link TestRule JUnit test rule} which which provides a simple and fluent API that gives you a way of
- * structuring your test code within when and then blocks used in Behavior-driven development.
+ * Bdd provides a simple and fluent API for structuring test code within when and then blocks used in Behavior-driven
+ * development.
  *
- * <p>Testing with JUnit-BDD starts by defining a JUnit test class that contains following rule definition:
+ * <p>Following static import is useful for simpler syntax when using JUnit-BDD:
  * <pre>
- * import com.github.lpandzic.junit.bdd.Bdd;
  * import static com.github.lpandzic.junit.bdd.Bdd.when;
- *
- * &#064;Rule
- * public Bdd bdd = Bdd.initialized();
  * </pre>
  *
  * <p><strong>Return value assertion</strong></p>
@@ -106,10 +98,14 @@ import java.util.Optional;
  * @see <a href="http://dannorth.net/introducing-bdd/">Introducing Bdd</a>
  * @see <a href="http://martinfowler.com/bliki/GivenWhenThen.html">GivenWhenThen article by M. Fowler</a>
  */
-public final class Bdd implements TestRule {
+public final class Bdd {
 
     /**
-     * Used for specifying behavior that should throw an exception.
+     * Used for specifying behavior that should throw an throwable.
+     *
+     * <p><strong>Note: Not defining then inside the test after calling this method will cause throwable to be
+     * silently swallowed and can cause subsequent test to fail on {@link #requireThatNoUnexpectedExceptionWasThrown().
+     * }</strong></p>
      *
      * @param throwableSupplier supplier or throwable
      * @param <T>               the type of
@@ -118,15 +114,9 @@ public final class Bdd implements TestRule {
      */
     public static <T extends Exception> Then.Throws<T> when(ThrowableSupplier<T> throwableSupplier) {
 
-        Bdd bdd = Bdd.bdd.get();
+        requireThatNoUnexpectedExceptionWasThrown();
 
-        if (bdd == null) {
-            throw new IllegalStateException("Bdd rule not initialized");
-        }
-
-        bdd.requireThatNoUnexpectedExceptionWasThrown();
-
-        return new When(bdd).when(throwableSupplier);
+        return new When().when(throwableSupplier);
     }
 
     /**
@@ -139,59 +129,26 @@ public final class Bdd implements TestRule {
      */
     public static <T> Then.Returns<T> when(T value) {
 
-        Bdd bdd = Bdd.bdd.get();
+        requireThatNoUnexpectedExceptionWasThrown();
 
-        if (bdd == null) {
-            throw new IllegalStateException("Bdd rule not initialized");
-        }
-
-        bdd.requireThatNoUnexpectedExceptionWasThrown();
-
-        return new When(bdd).when(value);
+        return new When().when(value);
     }
 
     /**
-     * Static factory method for {@link Bdd}.
-     *
-     * @return new bdd
+     * {@link ThreadLocal} exception thrown or {@link Optional#empty()}.
      */
-    public static Bdd initialized() {
-
-        Bdd bdd = new Bdd();
-        Bdd.bdd.set(bdd);
-        return bdd;
-    }
-
-    private static final ThreadLocal<Bdd> bdd = new ThreadLocal<>();
-
-    /**
-     * Exception thrown in a {@link When} or {@link Optional#empty()}.
-     */
-    private Optional<Throwable> thrownException;
-
-    @Override
-    public Statement apply(Statement base, Description description) {
-
-        return new Statement() {
-            @Override
-            public void evaluate() throws Throwable {
-
-                base.evaluate();
-                requireThatNoUnexpectedExceptionWasThrown();
-            }
-        };
-    }
+    private static ThreadLocal<Optional<Throwable>> thrownException = new ThreadLocal<>().withInitial(Optional::empty);
 
     /**
      * Inserts the {@code throwable} into {@link #thrownException}.
      *
      * @param throwable to add
      */
-    void putThrownException(Throwable throwable) {
+    static void putThrownException(Throwable throwable) {
 
         requireThatNoUnexpectedExceptionWasThrown();
 
-        thrownException = Optional.of(throwable);
+        thrownException.set(Optional.of(throwable));
     }
 
     /**
@@ -201,16 +158,20 @@ public final class Bdd implements TestRule {
      *
      * @return {@link #thrownException}
      */
-    Optional<Throwable> takeThrownException() {
+    static Optional<Throwable> takeThrownException() {
 
-        Optional<Throwable> thrownException = this.thrownException;
-        this.thrownException = Optional.empty();
+        Optional<Throwable> thrownException = Bdd.thrownException.get();
+
+        Bdd.thrownException.set(Optional.<Throwable>empty());
+
         return thrownException;
     }
 
-    void throwUnexpectedException(Throwable throwable) {
+    static void throwUnexpectedException(Optional<Throwable> throwable) {
 
-        throw new IllegalStateException("Unexpected exception was thrown", throwable);
+        if (throwable.isPresent()) {
+            throw new IllegalStateException("Unexpected exception was thrown", throwable.get());
+        }
     }
 
     /**
@@ -219,15 +180,14 @@ public final class Bdd implements TestRule {
      * @throws IllegalStateException if a {@code thrownException} already contains an exception,
      *                               the previous thrown exception is wrapped
      */
-    private void requireThatNoUnexpectedExceptionWasThrown() {
+    static void requireThatNoUnexpectedExceptionWasThrown() {
 
-        if (thrownException.isPresent()) {
-            throwUnexpectedException(thrownException.get());
+        if (thrownException.get().isPresent()) {
+            throwUnexpectedException(takeThrownException());
         }
     }
 
     private Bdd() {
 
-        thrownException = Optional.empty();
     }
 }
