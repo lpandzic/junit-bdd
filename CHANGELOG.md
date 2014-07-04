@@ -1,7 +1,7 @@
 ## 2.0
 
   - **Breaking change**: removed JUnit TestRule from Bdd - it is no longer required (nor possible) to define Bdd as a JUnit TestRule
-  - unexpected exceptions are no longer wrapped
+  - unexpected exceptions are no longer wrapped but are simply rethrown
   - changed JUnit dependency scope to test - JUnit Bdd is now dependency free for users!
 
 ## 1.3
