@@ -147,11 +147,11 @@ For example, the first two testing examples can be translated to:
 
 ## <a name="Contributing"></a> Contributing
 
-If you have an idea for a new feature or want to report a bug please use the [issue tracker][11]
+If you have an idea for a new feature or want to report a bug please use the [issue tracker][9]
 
 ## <a name="License"></a> License
 
-Licensed under [MIT License][10].
+Licensed under [MIT License][8].
 
 ## <a name="Credits"></a> Credits
 
