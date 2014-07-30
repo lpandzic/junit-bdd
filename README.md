@@ -147,7 +147,7 @@ For example, the first two testing examples can be translated to:
 
 ## <a name="Contributing"></a> Contributing
 
-If you have an idea for a new feature or want to report a bug please use the [issue tracker][9]
+If you have an idea for a new feature or want to report a bug please use the [issue tracker][9].
 
 ## <a name="License"></a> License
 
