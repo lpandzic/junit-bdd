@@ -1,4 +1,4 @@
-package com.github.lpandzic.junit.bdd;
+package com.github.lpandzic.bdd4j;
 
 import static java.util.Objects.requireNonNull;
 

@@ -1,8 +1,8 @@
-package com.github.lpandzic.junit.bdd;
+package com.github.lpandzic.bdd4j;
 
 import org.junit.Test;
 
-import static com.github.lpandzic.junit.bdd.Bdd.when;
+import static com.github.lpandzic.bdd4j.Bdd4j.when;
 import static org.junit.Assert.*;
 
 /**

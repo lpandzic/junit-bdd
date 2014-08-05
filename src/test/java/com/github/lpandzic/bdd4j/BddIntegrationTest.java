@@ -1,4 +1,4 @@
-package com.github.lpandzic.junit.bdd;
+package com.github.lpandzic.bdd4j;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -6,7 +6,7 @@ import org.junit.rules.ExpectedException;
 
 import java.io.IOException;
 
-import static com.github.lpandzic.junit.bdd.Bdd.when;
+import static com.github.lpandzic.bdd4j.Bdd4j.when;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.MatcherAssert.assertThat;
