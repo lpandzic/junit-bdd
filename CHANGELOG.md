@@ -1,3 +1,8 @@
+## 2.1-SNAPSHOT
+
+- migration to `com.github.lpandzic.bdd4j` package
+- old entry point `com.github.lpandzic.junit.bdd.Bdd` is deprecated and is replaced by `com.github.lpandzic.bdd4j.Bdd4j`.
+
 ## 2.0
 
   - **Breaking change**: removed JUnit TestRule from Bdd - it is no longer required (nor possible) to define Bdd as a JUnit TestRule

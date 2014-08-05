@@ -24,7 +24,18 @@ For more information on the subject of  Behavior-driven development see the foll
 
 ## <a name="News"></a> News
 
-###2.0
+### 2.1-SNAPSHOT
+
+New entry point used for static imports is
+
+```java
+com.github.lpandzic.bdd4j.Bdd4j
+```
+
+All core classes have moved to the new  `com.github.lpandzic.bdd4j` package.
+This is a precondition required for [rename of the project](https://github.com/lpandzic/junit-bdd/issues/13).
+
+### 2.0
 
 JUnit dependency has been removed so the following is no longer required nor possible:
 
