@@ -1,16 +1,14 @@
-package com.github.lpandzic.junit.bdd;
+package com.github.lpandzic.bdd4j;
 
-import com.github.lpandzic.bdd4j.Bdd4j;
-import com.github.lpandzic.bdd4j.Then;
-import com.github.lpandzic.bdd4j.ThrowableSupplier;
+import static com.github.lpandzic.bdd4j.Bdd.requireThatNoUnexpectedExceptionWasThrown;
 
 /**
- * Bdd provides a simple and fluent API for structuring test code within when and then blocks used in Behavior-driven
+ * Bdd4j provides a simple and fluent API for structuring test code within when and then blocks used in Behavior-driven
  * development.
  *
- * <p>Following static import is useful for simpler syntax when using JUnit-BDD:
+ * <p>Following static import is useful for simpler syntax when using Bdd4j:
  * <pre>
- * import static com.github.lpandzic.junit.bdd.Bdd.when;
+ * import static com.github.lpandzic.bdd4j.Bdd4j.when;
  * </pre>
  *
  * <p><strong>Return value assertion</strong></p>
@@ -99,29 +97,26 @@ import com.github.lpandzic.bdd4j.ThrowableSupplier;
  * @author Lovro Pandzic
  * @see <a href="http://dannorth.net/introducing-bdd/">Introducing Bdd</a>
  * @see <a href="http://martinfowler.com/bliki/GivenWhenThen.html">GivenWhenThen article by M. Fowler</a>
- * @deprecated As of 2.1, replaced by {@link Bdd4j}.
  */
-@Deprecated
-public final class Bdd {
+public interface Bdd4j {
 
     /**
      * Used for specifying behavior that should throw an throwable.
      *
      * <p><strong>Note: Not defining then inside the test after calling this method will cause throwable to be
-     * silently swallowed and can cause subsequent test to fail on {@link com.github.lpandzic.bdd4j.Bdd#requireThatNoUnexpectedExceptionWasThrown()}.
+     * silently swallowed and can cause subsequent test to fail on {@link Bdd#requireThatNoUnexpectedExceptionWasThrown()}.
      * }</strong></p>
      *
      * @param throwableSupplier supplier or throwable
      * @param <T>               the type of
      *
      * @return new {@link Then.Throws}
-     *
-     * @deprecated As of 2.1, replaced by {@link Bdd4j#when(ThrowableSupplier)}.
      */
-    @Deprecated
     public static <T extends Exception> Then.Throws<T> when(ThrowableSupplier<T> throwableSupplier) {
 
-        return Bdd4j.when(throwableSupplier);
+        requireThatNoUnexpectedExceptionWasThrown();
+
+        return new When().when(throwableSupplier);
     }
 
     /**
@@ -131,16 +126,11 @@ public final class Bdd {
      * @param <T>   type of {@code value}
      *
      * @return new {@link Then.Returns}
-     *
-     * @deprecated As of 2.1, replaced by {@link Bdd4j#when(Object)}.
      */
-    @Deprecated
     public static <T> Then.Returns<T> when(T value) {
 
-        return Bdd4j.when(value);
-    }
+        requireThatNoUnexpectedExceptionWasThrown();
 
-    private Bdd() {
-
+        return new When().when(value);
     }
 }

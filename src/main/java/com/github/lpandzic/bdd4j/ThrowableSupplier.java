@@ -1,4 +1,4 @@
-package com.github.lpandzic.junit.bdd;
+package com.github.lpandzic.bdd4j;
 
 /**
  * Represents a supplier of a {@link Throwable}.

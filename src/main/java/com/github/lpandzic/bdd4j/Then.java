@@ -1,4 +1,4 @@
-package com.github.lpandzic.junit.bdd;
+package com.github.lpandzic.bdd4j;
 
 import java.util.Optional;
 import java.util.function.Consumer;
