@@ -98,7 +98,7 @@ import static com.github.lpandzic.bdd4j.Bdd.requireThatNoUnexpectedExceptionWasT
  * @see <a href="http://dannorth.net/introducing-bdd/">Introducing Bdd</a>
  * @see <a href="http://martinfowler.com/bliki/GivenWhenThen.html">GivenWhenThen article by M. Fowler</a>
  */
-public interface Bdd4j {
+public class Bdd4j {
 
     /**
      * Used for specifying behavior that should throw an throwable.
