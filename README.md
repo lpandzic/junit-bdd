@@ -1,6 +1,7 @@
 #JUnit-BDD
 
 [![Build Status](https://travis-ci.org/lpandzic/junit-bdd.svg?branch=master)](https://travis-ci.org/lpandzic/junit-bdd)
+[![Coverage Status](https://img.shields.io/coveralls/lpandzic/junit-bdd.svg)](https://coveralls.io/r/lpandzic/junit-bdd?branch=coverage)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.lpandzic/junit-bdd/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.lpandzic/junit-bdd)
 
 JUnit-BDD provides a simple and fluent API for structuring test code within when and then blocks used in Behavior-driven development.
