@@ -1,6 +1,6 @@
 #JUnit-BDD
 
-[![Build Status](https://lpandzic.ci.cloudbees.com/buildStatus/icon?job=junit-bdd)](https://lpandzic.ci.cloudbees.com/job/junit-bdd/)
+[![Build Status](https://travis-ci.org/lpandzic/junit-bdd.svg?branch=master)](https://travis-ci.org/lpandzic/junit-bdd)
 
 JUnit-BDD provides a simple and fluent API for structuring test code within when and then blocks used in Behavior-driven development.
 
@@ -20,7 +20,6 @@ For more information on the subject of  Behavior-driven development see the foll
 3. [Installation](#Installation)
 4. [Contributing](#Contributing)
 5. [License](#License)
-6. [Credits](#Credits)
 
 ## <a name="News"></a> News
 
@@ -163,12 +162,6 @@ If you have an idea for a new feature or want to report a bug please use the [is
 ## <a name="License"></a> License
 
 Licensed under [MIT License][8].
-
-## <a name="Credits"></a> Credits
-
-Continuous Integration provided by:
-
-[![Powered by CloudBees](http://www.cloudbees.com/sites/default/files/Button-Powered-by-CB.png)](http://www.cloudbees.com/sites/default/files/Button-Powered-by-CB.png)
 
 [1]: http://dannorth.net/introducing-bdd/
 [2]: http://martinfowler.com/bliki/GivenWhenThen.html
