@@ -46,8 +46,8 @@
   </issueManagement>
 
   <ciManagement>
-    <system>Jenkins</system>
-    <url>https://lpandzic.ci.cloudbees.com/job/junit-bdd/</url>
+    <system>Travis</system>
+    <url>https://travis-ci.org/lpandzic/junit-bdd</url>
   </ciManagement>
 
   <properties>
