@@ -20,8 +20,8 @@
 
   <licenses>
     <license>
-      <name>The GNU Lesser General Public License, version 2.1</name>
-      <url>http://opensource.org/licenses/LGPL-2.1</url>
+      <name>MIT License</name>
+      <url>http://opensource.org/licenses/MIT</url>
       <distribution>repo</distribution>
     </license>
   </licenses>
