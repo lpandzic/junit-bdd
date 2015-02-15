@@ -25,7 +25,7 @@ For more information on the subject of  Behavior-driven development see the foll
 
 ## <a name="News"></a> News
 
-### 2.1-SNAPSHOT
+### 2.1
 
 New entry point used for static imports is
 
